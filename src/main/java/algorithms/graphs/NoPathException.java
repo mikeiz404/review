@@ -1,4 +1,4 @@
-package algorithms.graphs.search.dijkstra;
+package algorithms.graphs;
 
 public class NoPathException extends Exception
 {

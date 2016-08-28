@@ -1,0 +1,25 @@
+<configuration>
+  <property name="TEST_LOG_DIR" value="target/test-logs/" />
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="FILE:algorithms.graphs.dijkstra" class="ch.qos.logback.core.FileAppender">
+    <file>${TEST_LOG_DIR}/algorithms.graphs.Dijkstra.log</file>
+    <append>false</append>
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <logger name="algorithms.graphs.dijkstra" level="TRACE" additivity="false">
+    <appender-ref ref="FILE:algorithms.graphs.dijkstra" />
+  </logger>  
+  
+  <root level="WARN">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
