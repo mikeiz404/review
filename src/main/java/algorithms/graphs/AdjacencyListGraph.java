@@ -99,11 +99,11 @@ public class AdjacencyListGraph<V extends Vertex, E extends Edge<V>> implements 
 	public void addEdge( @NotNull E edge )
 	{
 		checkNotNull(edge);
-		checkArgument(this.map.containsKey(edge.getSource()), "Edge source (%s) does not exist in graph.", edge.getSource());
-		checkArgument(this.map.containsKey(edge.getDestination()), "Edge destination (%s) does not exist in graph.", edge.getDestination());
+		checkArgument(this.map.containsKey(edge.getSource()), "Edge source (%s) does not exist in the graph.", edge.getSource());
+		checkArgument(this.map.containsKey(edge.getDestination()), "Edge destination (%s) does not exist in the graph.", edge.getDestination());
+		checkArgument(!this.map.get(edge.getSource()).contains(edge), "Edge (%s) already exists in the graph.", edge);
 		
-		LinkedList<E> vertices = this.map.get(edge.getSource());
-		vertices.add(edge);
+		this.map.get(edge.getSource()).add(edge);
 	}
 
 	/**
@@ -114,8 +114,8 @@ public class AdjacencyListGraph<V extends Vertex, E extends Edge<V>> implements 
 	public void removeEdge( @NotNull E edge )
 	{
 		checkNotNull(edge);
-		checkArgument(this.map.containsKey(edge.getSource()), "Edge source (%s) does not exist in graph.", edge.getSource());
-		checkArgument(this.map.containsKey(edge.getDestination()), "Edge destination (%s) does not exist in graph.", edge.getDestination());
+		checkArgument(this.map.containsKey(edge.getSource()), "Edge source (%s) does not exist in the graph.", edge.getSource());
+		checkArgument(this.map.containsKey(edge.getDestination()), "Edge destination (%s) does not exist in the graph.", edge.getDestination());
 		
 		// note: complexity: a vertex can have at move |V| edges
 		boolean removed = this.map.get(edge.getSource()).remove(edge);
