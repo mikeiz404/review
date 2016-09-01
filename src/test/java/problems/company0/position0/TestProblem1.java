@@ -15,6 +15,7 @@ public class TestProblem1
 		Assert.assertEquals(new Pair(5, 2), solution.findClosest(8, new int[]{1, 5, 2, 4}));
 		Assert.assertEquals(new Pair(-7, 9), solution.findClosest(5, new int[]{-7, 4, 9}));
 		Assert.assertEquals(new Pair(5, 1), solution.findClosest(7, new int[]{1, 4, 5, 5, 9}));
+		Assert.assertEquals(new Pair(-1, 4), solution.findClosest(-3, new int[]{-1, 4, 5, 5, 9, -22}));
 	}
 	
 	@Test

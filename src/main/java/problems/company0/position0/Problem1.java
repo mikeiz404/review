@@ -2,7 +2,6 @@ package problems.company0.position0;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
