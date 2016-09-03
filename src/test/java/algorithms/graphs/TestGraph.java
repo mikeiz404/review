@@ -14,21 +14,21 @@ import javax.validation.constraints.NotNull;
  * Base class for testing graphs.
  */
 @Ignore
-public abstract class TestGraph
+public abstract class TestGraph<G extends Graph<Vertex, Edge<Vertex>>>
 {
-	public static interface GraphFactory
+	public static interface GraphFactory<G>
 	{
-		public Graph<Vertex, Edge<Vertex>> make( );
+		public G make( );
 	}
 	
-	private GraphFactory factory;
+	private GraphFactory<G> factory;
 	
-	public TestGraph( @NotNull GraphFactory factory )
+	public TestGraph( @NotNull GraphFactory<G> factory )
 	{
 		this.factory = checkNotNull(factory);
 	}
 	
-	public @NotNull Graph<Vertex, Edge<Vertex>> makeGraph( )
+	public @NotNull G makeGraph( )
 	{
 		return this.factory.make();
 	}
@@ -66,7 +66,7 @@ public abstract class TestGraph
 		graph.removeVertex(vertex);
 		
 		Set<Vertex> vertices = graph.getVertices();
-		Assert.assertEquals(vertices.size(), 0);
+		Assert.assertEquals(0, vertices.size());
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public abstract class TestGraph
 		graph.removeVertex(to);
 		
 		Set<Edge<Vertex>> edges = graph.getEdges(from);
-		Assert.assertEquals(edges.size(), 0);
+		Assert.assertEquals(0, edges.size());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -169,7 +169,7 @@ public abstract class TestGraph
 		graph.removeEdge(edge);
 		
 		Set<Edge<Vertex>> edges = graph.getEdges(from);
-		Assert.assertEquals(edges.size(), 0);
+		Assert.assertEquals(0, edges.size());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -230,15 +230,15 @@ public abstract class TestGraph
 		graph.removeEdge(b2c);
 		
 		Set<Edge<Vertex>> aEdges = graph.getEdges(a);
-		Assert.assertEquals(aEdges.size(), 2);
+		Assert.assertEquals(2, aEdges.size());
 		Assert.assertTrue(aEdges.contains(a2b));
 		Assert.assertTrue(aEdges.contains(a2c));
 		
 		Set<Edge<Vertex>> bEdges = graph.getEdges(b);
-		Assert.assertEquals(bEdges.size(), 0);
+		Assert.assertEquals(0, bEdges.size());
 		
 		Set<Edge<Vertex>> cEdges = graph.getEdges(c);
-		Assert.assertEquals(cEdges.size(), 1);
+		Assert.assertEquals(1, cEdges.size());
 		Assert.assertTrue(cEdges.contains(c2a));
 	}
 	
