@@ -2,6 +2,8 @@ package algorithms.graphs;
 
 import java.util.Set;
 import javax.validation.constraints.NotNull;
+
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -37,45 +39,63 @@ public class AdjacencyListGraph<V extends Vertex, E extends Edge<V>> implements 
 	}
 	
 	/**
-	 * Complexity: O(1)
-	 * @see {@link Graph#addVertex(Vertex)}
+	 * Complexity: O(1) per vertex.
+	 * @see {@link Graph#addVertices(Collection)}
 	 */
 	@Override
-	public void addVertex( @NotNull V vertex )
+	public void addVertices( @NotNull Collection<V> vertices )
 	{
-		checkNotNull(vertex);
-		checkArgument(!this.map.containsKey(vertex), "Vertex already exists in graph: %s.", vertex);
+		checkNotNull(vertices);
+		// check
+		for( V vertex : vertices )
+		{
+			checkNotNull(vertex);
+			checkArgument(!this.map.containsKey(vertex), "Vertex already exists in graph: %s.", vertex);
+		}
 		
-		this.map.put(vertex, new LinkedList<>());
+		// add
+		for( V vertex : vertices )
+		{
+			this.map.put(vertex, new LinkedList<>());
+		}
 	}
 
 	/**
-	 * Complexity: O(|E|)
-	 * @see {@link Graph#removeVertex(Vertex)}
+	 * Complexity: O(|E|) per vertex.
+	 * @see {@link Graph#removeVertices(Collection)}
 	 */
 	@Override
-	public void removeVertex( @NotNull V vertex )
+	public void removeVertices( @NotNull Collection<V> vertices )
 	{
-		checkNotNull(vertex);
-		checkArgument(this.map.containsKey(vertex), "Vertex does does not exist in the graph: %s.", vertex);
-		
-		this.map.remove(vertex);
-		
-		// remove associated edges
-		// note: could remove in O(|V|) if used a set for storing edges with a trade off in memory for larger array
-		// backing. Might be OK if sets are initialized with a size of a node's average edge count and the variability
-		// of the edge count is low for the graph. Or if the maximum edge count count for each node is known on node
-		// creation.
-		for( V v : this.getVertices() )
+		checkNotNull(vertices);
+		// check
+		for( V vertex : vertices )
 		{
-			Iterator<E> eIt = this.map.get(v).iterator();
-			while( eIt.hasNext() )
+			checkNotNull(vertex);
+			checkArgument(this.map.containsKey(vertex), "Vertex does does not exist in the graph: %s.", vertex);
+		}
+		
+		// remove
+		for( V vertex : vertices )
+		{
+			this.map.remove(vertex);
+			
+			// remove associated edges
+			// note: could remove in O(|V|) if used a set for storing edges with a trade off in memory for larger array
+			// backing. Might be OK if sets are initialized with a size of a node's average edge count and the variability
+			// of the edge count is low for the graph. Or if the maximum edge count count for each node is known on node
+			// addition.
+			for( V v : this.getVertices() )
 			{
-				E e = eIt.next();
-				
-				if( e.getSource().equals(vertex) || e.getDestination().equals(vertex) )
+				Iterator<E> edgeIt = this.map.get(v).iterator();
+				while( edgeIt.hasNext() )
 				{
-					eIt.remove();
+					E e = edgeIt.next();
+					
+					if( e.getSource().equals(vertex) || e.getDestination().equals(vertex) )
+					{
+						edgeIt.remove();
+					}
 				}
 			}
 		}
@@ -92,35 +112,62 @@ public class AdjacencyListGraph<V extends Vertex, E extends Edge<V>> implements 
 	}
 
 	/**
-	 * Complexity: O(1)
-	 * @see {@link Graph#addEdge(Edge)}
+	 * Complexity: O(1) per edge.
+	 * @see {@link Graph#addEdges(Collection)}
 	 */
 	@Override
-	public void addEdge( @NotNull E edge )
+	public void addEdges( @NotNull Collection<E> edges )
 	{
-		checkNotNull(edge);
-		checkArgument(this.map.containsKey(edge.getSource()), "Edge source (%s) does not exist in the graph.", edge.getSource());
-		checkArgument(this.map.containsKey(edge.getDestination()), "Edge destination (%s) does not exist in the graph.", edge.getDestination());
-		checkArgument(!this.map.get(edge.getSource()).contains(edge), "Edge (%s) already exists in the graph.", edge);
+		checkNotNull(edges);
+		// check
+		for( E edge : edges )
+		{
+			checkNotNull(edge);
+			checkArgument(this.map.containsKey(edge.getSource()),
+			              "Edge source (%s) does not exist in the graph.",
+			              edge.getSource());
+			checkArgument(this.map.containsKey(edge.getDestination()),
+			              "Edge destination (%s) does not exist in the graph.",
+			              edge.getDestination());
+			checkArgument(!this.map.get(edge.getSource()).contains(edge), 
+			              "Edge (%s) already exists in the graph.",
+			              edge);
+		}
 		
-		this.map.get(edge.getSource()).add(edge);
+		// add
+		for( E edge : edges )
+		{
+			this.map.get(edge.getSource()).add(edge);
+		}
 	}
 
 	/**
-	 * Complexity: O(|V|)
-	 * @see {@link Graph#removeEdge(Edge)}
+	 * Complexity: O(|V|) per edge.
+	 * @see {@link Graph#removeEdges(Collection)}
 	 */
 	@Override
-	public void removeEdge( @NotNull E edge )
+	public void removeEdges( @NotNull Collection<E> edges )
 	{
-		checkNotNull(edge);
-		checkArgument(this.map.containsKey(edge.getSource()), "Edge source (%s) does not exist in the graph.", edge.getSource());
-		checkArgument(this.map.containsKey(edge.getDestination()), "Edge destination (%s) does not exist in the graph.", edge.getDestination());
+		checkNotNull(edges);
+		// check
+		for( E edge : edges )
+		{
+			checkNotNull(edge);
+			checkArgument(this.map.containsKey(edge.getSource()),
+			             "Edge source (%s) does not exist in the graph.",
+			             edge.getSource());
+			checkArgument(this.map.containsKey(edge.getDestination()),
+			             "Edge destination (%s) does not exist in the graph.",
+			             edge.getDestination());
+			checkArgument(this.map.get(edge.getSource()).contains(edge), "Edge does not exist in the graph: %s.", edge);
+		}
 		
-		// note: complexity: a vertex can have at move |V| edges
-		boolean removed = this.map.get(edge.getSource()).remove(edge);
-		
-		checkArgument(removed, "Edge does not exist in the graph: %s.", edge);
+		// remove
+		for( E edge : edges )
+		{
+			// note: complexity: remove iterates over edge list and a vertex can have at most |V| edges
+			this.map.get(edge.getSource()).remove(edge);
+		}
 	}
 
 	/**
@@ -134,5 +181,30 @@ public class AdjacencyListGraph<V extends Vertex, E extends Edge<V>> implements 
 		checkArgument(this.map.containsKey(vertex), "Vertex does not exist in the graph: %s.", vertex);
 		
 		return new HashSet<>(this.map.get(vertex));
+	}
+
+	/**
+	 * Complexity: O(|V|) to iterate over list of edges at source vertex.
+	 * See {@link Graph#getEdge(Vertex, Vertex)}.
+	 */
+	@Override
+	public E getEdge( @NotNull V source, @NotNull V destination )
+	{
+		checkNotNull(source);
+		checkNotNull(destination);
+		checkArgument(this.map.containsKey(source), "Graph does not contain the edge source vertex.", source);
+		checkArgument(this.map.containsKey(destination), "Graph does not contain the edge destination vertex.", destination);
+		
+		// look for edge from source
+		for( E edge : this.map.get(source) )
+		{
+			if( edge.getDestination().equals(destination) )
+			{
+				return edge;
+			}
+		}
+		
+		// edge not found
+		return null;
 	}
 }

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 import javax.validation.constraints.NotNull;
 import static com.google.common.base.Preconditions.checkArgument;
@@ -32,26 +31,11 @@ public class AdjacencyMatrixGraph<V extends Vertex, E extends Edge<V>> implement
 	}
 	
 	/**
-	 * Calls {@link #addVertices(Collection)}.
-	 * @see {@link Graph#addVertex(Vertex)}.
-	 */
-	@Override
-	public void addVertex( @NotNull V vertex )
-	{
-		checkNotNull(vertex);
-		
-		LinkedList<V> vertices = new LinkedList<>();
-		vertices.add(vertex);
-		
-		addVertices(vertices);
-	}
-	
-	/**
 	 * Complexity: O(V^2) for new matrix creation.
 	 * @see {@link Graph#addVertices(Vertex)}.
 	 * @param vertices vertices to add to the graph. The array must not contain null values.
 	 */
-	//@Override
+	@Override
 	public void addVertices( @NotNull Collection<V> vertices )
 	{
 		checkNotNull(vertices);
@@ -91,27 +75,12 @@ public class AdjacencyMatrixGraph<V extends Vertex, E extends Edge<V>> implement
 		// replace matrix with new matrix
 		this.matrix = newMatrix;
 	}
-
-	/**
-	 * Calls {@link #removeVertices(Collection)}.
-	 * @see {@link Graph#removeVertex(Vertex)}.
-	 */
-	@Override
-	public void removeVertex( @NotNull V vertex )
-	{
-		checkNotNull(vertex);
-		
-		LinkedList<V> vertices = new LinkedList<>();
-		vertices.add(vertex);
-		
-		removeVertices(vertices);
-	}
 	
 	/**
 	 * Complexity: O(|V|^2) to copy old matrix into new matrix.
 	 * @see {@link Graph#removeVertices(Vertex)}.
 	 */
-	//@Override
+	@Override
 	public void removeVertices( @NotNull Collection<V> vertices )
 	{
 		checkNotNull(vertices);
@@ -184,56 +153,82 @@ public class AdjacencyMatrixGraph<V extends Vertex, E extends Edge<V>> implement
 	{
 		return this.vertexMap.keySet();
 	}
+	
 
 	/**
-	 * Complexity: O(1) to lookup source and destination vertex indexes, and set the edge.
+	 * Complexity: O(1) per edge to lookup source and destination vertex indexes, and set the edge.
 	 * @see {@link Graph#addEdge(Edge)}.
 	 */
 	@Override
-	public void addEdge( @NotNull E edge )
+	public void addEdges( @NotNull Collection<E> edges )
 	{
-		checkNotNull(edge);
-		Integer sourceIndex = this.vertexMap.get(edge.getSource());
-		Integer destinationIndex = this.vertexMap.get(edge.getDestination());
-		checkArgument(sourceIndex != null,
-		              "Graph does not contain the edge source vertex.", edge.getSource());
-		checkArgument(destinationIndex != null,
-		              "Graph does not contain the edge destination vertex.", edge.getDestination());
-		checkArgument(this.matrix[sourceIndex][destinationIndex] == null,
-		             "Graph already contains an edge (%s) from vertex %s to vertex %s.",
-		             this.matrix[sourceIndex][destinationIndex],
-		             edge.getSource(),
-		             edge.getDestination());
+		checkNotNull(edges);
+		// check edges
+		for( E edge : edges )
+		{
+			checkNotNull(edge);
+			Integer sourceIndex = this.vertexMap.get(edge.getSource());
+			Integer destinationIndex = this.vertexMap.get(edge.getDestination());
+			checkArgument(sourceIndex != null,
+			              "Graph does not contain the edge source vertex.", edge.getSource());
+			checkArgument(destinationIndex != null,
+			              "Graph does not contain the edge destination vertex.", edge.getDestination());
+			checkArgument(this.matrix[sourceIndex][destinationIndex] == null,
+			             "Graph already contains an edge (%s) from vertex %s to vertex %s.",
+			             this.matrix[sourceIndex][destinationIndex],
+			             edge.getSource(),
+			             edge.getDestination());
+		}
 		
-		this.matrix[sourceIndex][destinationIndex] = edge;
+		// add edges
+		for( E edge : edges )
+		{
+			int sourceIndex = this.vertexMap.get(edge.getSource());
+			int destinationIndex = this.vertexMap.get(edge.getDestination());
+			
+			this.matrix[sourceIndex][destinationIndex] = edge;
+		}
 	}
 
 	/**
-	 * Complexity: O(1) to lookup source and destination vertex indexes, and remove the edge.
+	 * Complexity: O(1) per edge to lookup source and destination vertex indexes, and remove the edge.
 	 * @see {@link Graph#removeEdge(Edge)}.
 	 */
 	@Override
-	public void removeEdge( @NotNull E edge )
+	public void removeEdges( @NotNull Collection<E> edges )
 	{
-		checkNotNull(edge);
-		Integer sourceIndex = this.vertexMap.get(edge.getSource());
-		Integer destinationIndex = this.vertexMap.get(edge.getDestination());
-		checkArgument(sourceIndex != null,
-		              "Graph does not contain the edge source vertex.", edge.getSource());
-		checkArgument(destinationIndex != null,
-		              "Graph does not contain the edge destination vertex.", edge.getDestination());
-		checkArgument(this.matrix[sourceIndex][destinationIndex] != null,
-                      "Graph does not contain the edge: %s", edge);
+		checkNotNull(edges);
+		// check edges
+		for( E edge : edges )
+		{
+			checkNotNull(edge);
+			Integer sourceIndex = this.vertexMap.get(edge.getSource());
+			Integer destinationIndex = this.vertexMap.get(edge.getDestination());
+			checkArgument(sourceIndex != null,
+			              "Graph does not contain the edge source vertex.", edge.getSource());
+			checkArgument(destinationIndex != null,
+			              "Graph does not contain the edge destination vertex.", edge.getDestination());
+			checkArgument(this.matrix[sourceIndex][destinationIndex] != null,
+	                      "Graph does not contain the edge: %s", edge);
+			
+			Edge<?> currentEdge = this.matrix[sourceIndex][destinationIndex];
+			checkArgument(currentEdge.equals(edge),
+			              "Graph contains a different edge (%s) than edge %s from vertex %s to vertex %s.",
+			              currentEdge,
+			              edge,
+			              edge.getSource(),
+			              edge.getDestination());
+		}
 		
-		Edge<?> currentEdge = this.matrix[sourceIndex][destinationIndex];
-		checkArgument(currentEdge.equals(edge),
-		              "Graph contains a different edge (%s) than edge %s from vertex %s to vertex %s.",
-		              currentEdge,
-		              edge,
-		              edge.getSource(),
-		              edge.getDestination());
+		// remove edges
+		for( E edge : edges )
+		{
+			int sourceIndex = this.vertexMap.get(edge.getSource());
+			int destinationIndex = this.vertexMap.get(edge.getDestination());
+			
+			this.matrix[sourceIndex][destinationIndex] = null;
+		}
 		
-		this.matrix[sourceIndex][destinationIndex] = null;
 	}
 
 	/**
@@ -262,5 +257,25 @@ public class AdjacencyMatrixGraph<V extends Vertex, E extends Edge<V>> implement
 		}
 		
 		return edges;
+	}
+
+	/**
+	 * Complexity: O(1) to lookup source and destination indexes, and return edge from matrix.
+	 * See {@link Graph#getEdge(Vertex, Vertex)}.
+	 */
+	@Override
+	public @NotNull E getEdge( @NotNull V source, @NotNull V destination )
+	{
+		checkNotNull(source);
+		checkNotNull(destination);
+		Integer sourceIndex = this.vertexMap.get(source);
+		Integer destinationIndex = this.vertexMap.get(destination);
+		checkArgument(sourceIndex != null, "Graph does not contain the edge source vertex.", source);
+		checkArgument(destinationIndex != null, "Graph does not contain the edge destination vertex.", destination);
+		
+		@SuppressWarnings("unchecked")
+		E edge = (E) this.matrix[sourceIndex][destinationIndex];
+		
+		return edge;
 	}
 }

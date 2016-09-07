@@ -250,4 +250,61 @@ public abstract class TestGraph<G extends Graph<Vertex, Edge<Vertex>>>
 		
 		graph.getEdges(vertex);
 	}
+	
+	@Test
+	public void TestGetEdge( )
+	{
+		Graph<Vertex, Edge<Vertex>> graph = this.makeGraph();
+		Vertex from = new Vertex("from");
+		Vertex to = new Vertex("to");
+		Edge<Vertex> edge = new Edge<>(from, to);
+		
+		graph.addVertex(from);
+		graph.addVertex(to);
+		graph.addEdge(edge);
+		
+		Assert.assertEquals(edge, graph.getEdge(from, to));
+	}
+	
+	@Test
+	public void TestGetEdgeMissing( )
+	{
+		Graph<Vertex, Edge<Vertex>> graph = this.makeGraph();
+		Vertex from = new Vertex("from");
+		Vertex to = new Vertex("to");
+		
+		graph.addVertex(from);
+		graph.addVertex(to);
+		
+		Assert.assertEquals(null, graph.getEdge(from, to));
+	}
+	
+	@Test
+	public void TestHasEdge( )
+	{
+		Graph<Vertex, Edge<Vertex>> graph = this.makeGraph();
+		Vertex from = new Vertex("from");
+		Vertex to = new Vertex("to");
+		Edge<Vertex> edge = new Edge<>(from, to);
+		
+		graph.addVertex(from);
+		graph.addVertex(to);
+		graph.addEdge(edge);
+		
+		Assert.assertTrue(graph.hasEdge(from, to));
+	}
+	
+	@Test
+	public void TestHasEdgeMissing( )
+	{
+		Graph<Vertex, Edge<Vertex>> graph = this.makeGraph();
+		Vertex from = new Vertex("from");
+		Vertex to = new Vertex("to");
+		
+		graph.addVertex(from);
+		graph.addVertex(to);
+		
+		Assert.assertFalse(graph.hasEdge(from, to));
+	}
+	
 }
