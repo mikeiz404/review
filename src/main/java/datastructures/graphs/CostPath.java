@@ -1,4 +1,4 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 import javax.validation.constraints.NotNull;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -14,7 +14,7 @@ public class CostPath<V extends Vertex, E extends CostEdge<V>> extends Path<V, E
 	private int cost;
 	
 	/**
-	 * See {@link algorithms.graphs.Path#Path(algorithms.graphs.Path)}. Sets cost to zero.
+	 * See {@link datastructures.graphs.Path#Path(datastructures.graphs.Path)}. Sets cost to zero.
 	 * @param destination
 	 */
 	public CostPath( @NotNull V destination )
@@ -24,7 +24,7 @@ public class CostPath<V extends Vertex, E extends CostEdge<V>> extends Path<V, E
 	}
 	
 	/**
-	 * See {@link algorithms.graphs.Path#Path(Vertex)}. Sets cost to path cost.
+	 * See {@link datastructures.graphs.Path#Path(Vertex)}. Sets cost to path cost.
 	 * @param path
 	 */
 	public CostPath( @NotNull CostPath<V, E> path )

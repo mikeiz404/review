@@ -1,4 +1,4 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 public interface CostEdgeInterface
 {

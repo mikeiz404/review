@@ -1,4 +1,4 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 import javax.validation.constraints.NotNull;
 import static com.google.common.base.Preconditions.checkNotNull;

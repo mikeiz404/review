@@ -1,4 +1,4 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 import java.util.Set;
 import javax.validation.constraints.NotNull;

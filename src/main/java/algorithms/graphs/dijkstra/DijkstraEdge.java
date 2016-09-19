@@ -1,7 +1,8 @@
 package algorithms.graphs.dijkstra;
 
 import javax.validation.constraints.NotNull;
-import algorithms.graphs.CostEdge;
+
+import datastructures.graphs.CostEdge;
 
 public class DijkstraEdge extends CostEdge<DijkstraVertex>
 {

@@ -1,8 +1,8 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 import javax.validation.constraints.NotNull;
 
-public class CostEdge<V extends algorithms.graphs.Vertex> extends algorithms.graphs.Edge<V> implements CostEdgeInterface
+public class CostEdge<V extends datastructures.graphs.Vertex> extends datastructures.graphs.Edge<V> implements CostEdgeInterface
 {
 	private final int cost;
 	

@@ -1,6 +1,11 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 import org.junit.Test;
+
+import datastructures.graphs.Edge;
+import datastructures.graphs.Graph;
+import datastructures.graphs.Vertex;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 

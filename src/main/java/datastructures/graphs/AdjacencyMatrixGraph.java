@@ -1,4 +1,4 @@
-package algorithms.graphs;
+package datastructures.graphs;
 
 import java.util.Arrays;
 import java.util.Collection;

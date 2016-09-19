@@ -8,13 +8,13 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import algorithms.graphs.CostEdge;
-import algorithms.graphs.CostPath;
-import algorithms.graphs.Graph;
-import algorithms.graphs.MarkedVertex;
-import algorithms.graphs.MarkedVertexInterface;
-import algorithms.graphs.NoPathException;
-import algorithms.graphs.Vertex;
+import datastructures.graphs.CostEdge;
+import datastructures.graphs.CostPath;
+import datastructures.graphs.Graph;
+import datastructures.graphs.MarkedVertex;
+import datastructures.graphs.MarkedVertexInterface;
+import datastructures.graphs.NoPathException;
+import datastructures.graphs.Vertex;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkArgument;

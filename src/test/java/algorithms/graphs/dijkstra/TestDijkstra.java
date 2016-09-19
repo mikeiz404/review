@@ -7,11 +7,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import algorithms.graphs.AdjacencyListGraph;
-import algorithms.graphs.CostPath;
-import algorithms.graphs.Graph;
-import algorithms.graphs.NoPathException;
-import algorithms.graphs.Vertex;
+
+import datastructures.graphs.AdjacencyListGraph;
+import datastructures.graphs.CostPath;
+import datastructures.graphs.Graph;
+import datastructures.graphs.NoPathException;
+import datastructures.graphs.Vertex;
 
 public class TestDijkstra
 {	
