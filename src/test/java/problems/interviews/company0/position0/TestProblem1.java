@@ -1,12 +1,12 @@
-package problems.company0.position0;
+package problems.interviews.company0.position0;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import problems.company0.position0.Problem1.Pair;
-import problems.company0.position0.Problem1.Solution;
-import problems.company0.position0.Problem1.Solution1;
-import problems.company0.position0.Problem1.Solution2;
+import problems.interviews.company0.position0.Problem1.Pair;
+import problems.interviews.company0.position0.Problem1.Solution;
+import problems.interviews.company0.position0.Problem1.Solution1;
+import problems.interviews.company0.position0.Problem1.Solution2;
 
 public class TestProblem1
 {

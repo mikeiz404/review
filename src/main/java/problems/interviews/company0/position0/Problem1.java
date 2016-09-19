@@ -1,4 +1,4 @@
-package problems.company0.position0;
+package problems.interviews.company0.position0;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
