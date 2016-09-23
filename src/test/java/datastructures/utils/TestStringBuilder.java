@@ -1,9 +1,7 @@
 package datastructures.utils;
 
 import org.junit.Test;
-
 import datastructures.utils.StringBuilder;
-
 import org.junit.Assert;
 
 public class TestStringBuilder
