@@ -1,16 +1,15 @@
-package problems.interviews.company0.position0;
+package problems.interviews.company0.position0.problem0;
 
 import org.junit.Assert;
 import org.junit.Test;
+import problems.interviews.company0.position0.problem0.Pair;
+import problems.interviews.company0.position0.problem0.SolutionInterface;
+import problems.interviews.company0.position0.problem0.Solution1;
+import problems.interviews.company0.position0.problem0.Solution2;
 
-import problems.interviews.company0.position0.Problem1.Pair;
-import problems.interviews.company0.position0.Problem1.Solution;
-import problems.interviews.company0.position0.Problem1.Solution1;
-import problems.interviews.company0.position0.Problem1.Solution2;
-
-public class TestProblem1
+public class TestSolutions
 {
-	public void testSolution( Solution solution )
+	public void testSolution( SolutionInterface solution )
 	{
 		Assert.assertEquals(new Pair(5, 2), solution.findClosest(8, new int[]{1, 5, 2, 4}));
 		Assert.assertEquals(new Pair(-7, 9), solution.findClosest(5, new int[]{-7, 4, 9}));
