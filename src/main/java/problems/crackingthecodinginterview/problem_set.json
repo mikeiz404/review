@@ -3,7 +3,7 @@
   "book" :
   {
     "title" : "Cracking The Coding Interview",
-    "edition" : "5th"
-    "isbn" : "978-0-9847828-0-2",
-  },
+    "edition" : "5th",
+    "isbn" : "978-0-9847828-0-2"
+  }
 }
