@@ -1,4 +1,4 @@
-package problems.crackingthecodinginterview.probem1_2;
+package problems.crackingthecodinginterview.problem1_2;
 
 import org.junit.Assert;
 import org.junit.Test;
