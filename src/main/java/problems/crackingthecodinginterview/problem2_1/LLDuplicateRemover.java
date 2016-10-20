@@ -16,15 +16,15 @@ public class LLDuplicateRemover<T> implements LLDuplicateRemoverInterface<T>
 	 * Space: O(n).
 	 */
 	@Override
-	public void remove( @NotNull LLNode<T> head )
+	public void remove( LLNode<T> head )
 	{
 		HashSet<T> items = new HashSet<>();
-		
 		LLNode<T> node = head;
 		
 		while( node != null )
 		{
 			T item = node.getData();
+			LLNode<T> nextNode = node.getNext();
 			
 			if( items.contains(item) )
 			{ // seen 2+ times
@@ -35,7 +35,7 @@ public class LLDuplicateRemover<T> implements LLDuplicateRemoverInterface<T>
 				items.add(item);
 			}
 			
-			node = node.getNext();
+			node = nextNode;
 		}
 	}
 }

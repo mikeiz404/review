@@ -16,7 +16,7 @@ public class LowMemLLDuplicateRemover<T> implements LLDuplicateRemoverInterface<
 	 * Space: O(1).
 	 */
 	@Override
-	public void remove( @NotNull LLNode<T> head )
+	public void remove( LLNode<T> head )
 	{
 		LLNode<T> targetNode = head;
 		while( targetNode != null )
