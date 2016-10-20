@@ -24,4 +24,23 @@ public class LLUtils
 		
 		return head;
 	}
+	
+	public static <T> boolean areListsEqual( LLNode<T> aHead, LLNode<T> bHead )
+	{
+		LLNode<T> aNode = aHead;
+		LLNode<T> bNode = bHead;
+		
+		while( aNode != null && bNode != null )
+		{
+			if( !aNode.equals(bNode) )
+			{
+				return false;
+			}
+			
+			aNode = aNode.getNext();
+			bNode = bNode.getNext();
+		}
+		
+		return aNode == null && bNode == null;
+	}
 }

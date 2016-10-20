@@ -3,6 +3,7 @@ package problems.crackingthecodinginterview.problem2_1;
 import org.junit.Assert;
 import org.junit.Test;
 import problems.crackingthecodinginterview.common.LLNode;
+import problems.crackingthecodinginterview.common.LLUtils;
 
 public abstract class TestBase
 {
@@ -25,6 +26,7 @@ public abstract class TestBase
 			else // head != null
 			{
 				node.setNext(newNode);
+				node = node.getNext();
 			}
 		}
 		
@@ -36,10 +38,23 @@ public abstract class TestBase
 	{
 		LLDuplicateRemoverInterface<Character> remover = getTestInstance();
 		LLNode<Character> list = makeList("abbcababz");
+		LLNode<Character> expected = makeList("abcz");
 		
 		remover.remove(list);
 		
-		Assert.assertEquals(makeList("abcz"), list);
+		Assert.assertTrue(LLUtils.areListsEqual(expected, list));
+	}
+	
+	@Test
+	public void test2( )
+	{
+		LLDuplicateRemoverInterface<Character> remover = getTestInstance();
+		LLNode<Character> list = makeList("aaa");
+		LLNode<Character> expected = makeList("a");
+		
+		remover.remove(list);
+		
+		Assert.assertTrue(LLUtils.areListsEqual(expected, list));
 	}
 	
 	@Test
@@ -47,31 +62,21 @@ public abstract class TestBase
 	{
 		LLDuplicateRemoverInterface<Character> remover = getTestInstance();
 		LLNode<Character> list = makeList("abcdefg");
+		LLNode<Character> expected = makeList("abcdefg");
 		
 		remover.remove(list);
 		
-		Assert.assertEquals(makeList("abcdefg"), list);
+		Assert.assertTrue(LLUtils.areListsEqual(expected, list));
 	}
 	
 	@Test
 	public void testEmpty( )
 	{
 		LLDuplicateRemoverInterface<Character> remover = getTestInstance();
-		LLNode<Character> list = makeList("");
+		LLNode<Character> list = null;
 		
 		remover.remove(list);
 		
-		Assert.assertEquals(makeList(""), list);
-	}
-	
-	@Test
-	public void testNullItems( )
-	{
-		LLDuplicateRemoverInterface<Character> remover = getTestInstance();
-		LLNode<Character> list = makeList("\u0000\u0000\u0000");
-		
-		remover.remove(list);
-		
-		Assert.assertEquals(makeList("\u0000"), list);
+		Assert.assertEquals(null, list);
 	}
 }

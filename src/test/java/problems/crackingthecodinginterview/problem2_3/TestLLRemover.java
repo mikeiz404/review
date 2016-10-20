@@ -11,10 +11,11 @@ public class TestLLRemover
 	public void test( )
 	{
 		LLNode<Integer> head = LLUtils.makeList(new Integer[]{0, 1, 2, 3});
+		LLNode<Integer> expected = LLUtils.makeList(new Integer[]{0, 2, 3});
 		
 		LLRemover.remove(head.getNext());
 		
-		Assert.assertEquals(LLUtils.makeList(new Integer[]{0, 2, 3}), head);
+		Assert.assertTrue(LLUtils.areListsEqual(expected, head));
 	}
 	
 	@Test(expected=NullPointerException.class)
