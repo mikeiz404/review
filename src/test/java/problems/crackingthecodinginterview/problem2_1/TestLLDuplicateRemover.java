@@ -1,6 +1,6 @@
 package problems.crackingthecodinginterview.problem2_1;
 
-public class LLDuplicateRemoverTester extends TestBase
+public class TestLLDuplicateRemover extends TestBase
 {
 	@Override
 	public <T> LLDuplicateRemoverInterface<T> getTestInstance( )
