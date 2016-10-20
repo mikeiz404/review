@@ -34,6 +34,7 @@ public class LLNode<T>
 	public void setNext( LLNode<T> next )
 	{
 		this.next = checkNotNull(next);
+		next.prev = this;
 	}
 	
 	public LLNode<T> getNext( )
@@ -49,6 +50,7 @@ public class LLNode<T>
 	public void setPrevious( @NotNull LLNode<T> prev )
 	{
 		this.prev = checkNotNull(prev);
+		prev.next = this;
 	}
 	
 	public LLNode<T> getPrevious( )
@@ -59,34 +61,34 @@ public class LLNode<T>
 	public LLNode<T> remove( )
 	{
 		// update previous next reference
-		if( this.prev != null )
+		if( this.getPrevious() != null )
 		{
-			if( this.next != null )
-			{
-				this.getPrevious().setNext(this.getNext());
-			}
-			else // this.next == null
+			if( this.getNext() == null )
 			{
 				this.getPrevious().removeAllNext();
+			}
+			else // this.getNext() != null
+			{
+				this.getPrevious().setNext(this.getNext());
 			}
 		}
 		
 		// update next previous references
-		if( this.next != null )
+		if( this.getNext() != null )
 		{
-			if( this.prev != null )
-			{
-				this.getNext().setPrevious(this.getPrevious());
-			}
-			else // this.prev == null
+			if( this.getPrevious() == null )
 			{
 				this.getNext().removeAllPrevious();
+			}
+			else // this.getPrevious() != null
+			{
+				this.getNext().setPrevious(this.getPrevious());
 			}
 		}
 		
 		// update next and prev references
-		this.next = null;
-		this.prev = null;
+		this.removeAllNext();
+		this.removeAllPrevious();
 		
 		return this;
 	}
@@ -94,11 +96,6 @@ public class LLNode<T>
 	public void removeAllPrevious( )
 	{
 		this.prev = null;
-	}
-	
-	public boolean hasPrevious( )
-	{
-		return this.prev != null;
 	}
 	
 	@Override
