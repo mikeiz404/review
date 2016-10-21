@@ -92,7 +92,7 @@ public class AdjacencyListGraph<V extends Vertex, E extends Edge<V>> implements 
 				{
 					E e = edgeIt.next();
 					
-					if( e.getSource().equals(vertex) || e.getDestination().equals(vertex) )
+					if( e.getDestination().equals(vertex) )
 					{
 						edgeIt.remove();
 					}
