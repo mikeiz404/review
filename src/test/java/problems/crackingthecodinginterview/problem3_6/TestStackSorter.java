@@ -4,8 +4,10 @@ import java.util.ArrayDeque;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestStackSorter
+public abstract class TestStackSorter
 {
+	public abstract StackSorter getTestInstance( );
+	
 	protected static <T extends Comparable<T>> boolean isSortedAscending( ArrayDeque<T> stack )
 	{
 		if( stack.size() <= 1 )
@@ -46,7 +48,7 @@ public class TestStackSorter
 	@Test(expected=NullPointerException.class)
 	public void testNull( )
 	{
-		StackSorter.sort(null);
+		getTestInstance().sort(null);
 	}
 	
 	@Test
@@ -54,7 +56,7 @@ public class TestStackSorter
 	{
 		ArrayDeque<Integer> stack = new ArrayDeque<Integer>();
 		
-		StackSorter.sort(stack);
+		getTestInstance().sort(stack);
 		
 		Assert.assertTrue(isSortedAscending(stack));
 		
@@ -65,7 +67,7 @@ public class TestStackSorter
 	{
 		ArrayDeque<Integer> stack = makeStack(new Integer[]{1});
 		
-		StackSorter.sort(stack);
+		getTestInstance().sort(stack);
 		
 		Assert.assertTrue(isSortedAscending(stack));
 		
@@ -77,7 +79,7 @@ public class TestStackSorter
 	{
 		ArrayDeque<Integer> stack = makeStack(new Integer[]{1, 2, 3, 4, 5});
 		
-		StackSorter.sort(stack);
+		getTestInstance().sort(stack);
 		
 		Assert.assertTrue(isSortedAscending(stack));
 	}
@@ -87,7 +89,7 @@ public class TestStackSorter
 	{
 		ArrayDeque<Integer> stack = makeStack(new Integer[]{4, 3, 2, 1});
 		
-		StackSorter.sort(stack);
+		getTestInstance().sort(stack);
 		
 		Assert.assertTrue(isSortedAscending(stack));
 	}
@@ -97,7 +99,7 @@ public class TestStackSorter
 	{
 		ArrayDeque<Integer> stack = makeStack(new Integer[]{4, 3, 2, 1, 0});
 		
-		StackSorter.sort(stack);
+		getTestInstance().sort(stack);
 		
 		Assert.assertTrue(isSortedAscending(stack));
 	}
@@ -107,7 +109,7 @@ public class TestStackSorter
 	{
 		ArrayDeque<Integer> stack = makeStack(new Integer[]{-4, 0, 2, 1, 0});
 		
-		StackSorter.sort(stack);
+		getTestInstance().sort(stack);
 		
 		Assert.assertTrue(isSortedAscending(stack));
 	}
