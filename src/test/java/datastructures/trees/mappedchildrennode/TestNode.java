@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-public class TestMappedChildrenNode
+public class TestNode
 {
 	@Test
 	public void testGetValue( )

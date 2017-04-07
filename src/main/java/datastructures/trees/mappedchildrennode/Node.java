@@ -1,6 +1,6 @@
 package datastructures.trees.mappedchildrennode;
 
-public class Node<K, V> extends AbstractNode<Node<K, V>, K, V>
+public class Node<K, V> extends MappedChildrenNode<Node<K, V>, K, V>
 {
 
 	public Node( V value )

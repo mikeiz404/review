@@ -1,9 +1,9 @@
 package datastructures.trees.binarytree;
 
 import javax.validation.constraints.NotNull;
-import datastructures.trees.mappedchildrennode.AbstractNode;
+import datastructures.trees.mappedchildrennode.MappedChildrenNode;
 
-public class Node<V> extends AbstractNode<Node<V>, Node.ChildType, V>
+public class Node<V> extends MappedChildrenNode<Node<V>, Node.ChildType, V>
 {	
 	public enum ChildType
 	{

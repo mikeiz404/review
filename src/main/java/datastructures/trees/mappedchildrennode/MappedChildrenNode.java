@@ -3,18 +3,18 @@ package datastructures.trees.mappedchildrennode;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.validation.constraints.NotNull;
-import datastructures.trees.Node;
+import datastructures.trees.TreeNode;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkArgument;
 
-public abstract class AbstractNode<N extends AbstractNode<N, K, V>, K, V> implements Node<N, V>
+public abstract class MappedChildrenNode<N extends MappedChildrenNode<N, K, V>, K, V> implements TreeNode<N, V>
 {
 	private N parent;
 	private K key;
 	private V value;
 	private HashMap<K, N> children;
 	
-	public AbstractNode( @NotNull V value )
+	public MappedChildrenNode( @NotNull V value )
 	{
 		this.value = value;
 		this.children = new HashMap<>();

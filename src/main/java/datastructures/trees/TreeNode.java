@@ -3,7 +3,7 @@ package datastructures.trees;
 import java.util.Collection;
 import javax.validation.constraints.NotNull;
 
-public interface Node<N extends Node<N, V>, V>
+public interface TreeNode<N extends TreeNode<N, V>, V>
 {
 	public V getValue( );
 	
