@@ -2,8 +2,10 @@ package datastructures.graphs;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import javax.validation.constraints.NotNull;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public interface Graph<V extends Vertex, E extends Edge<V>>
 {
@@ -89,9 +91,28 @@ public interface Graph<V extends Vertex, E extends Edge<V>>
 	/**
 	 * Gets the edges coming from the given vertex.
 	 * @param vertex
-	 * @return the set of vertices coming from vertex.
+	 * @return the set of edges coming from vertex.
 	 */
 	public @NotNull Set<E> getEdges( @NotNull V vertex );
+	
+	/**
+	 * Gets the neighboring vertices of the given vertex.
+	 * @param vertex
+	 * @return the set of vertices which have edges coming from vertex.
+	 */
+	public default @NotNull Set<V> getNeighbors( @NotNull V vertex )
+	{
+		checkNotNull(vertex);
+		
+		HashSet<V> neighbors = new HashSet<>();
+		
+		for( E edge : this.getEdges(vertex) )
+		{
+			neighbors.add(edge.getDestination());
+		}
+		
+		return neighbors;
+	}
 	
 	/**
 	 * Gets the edge between source and destination.
