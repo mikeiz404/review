@@ -1,9 +1,13 @@
 package datastructures.trees.binarytree;
 
+import java.util.EnumMap;
+import java.util.LinkedList;
+import java.util.List;
 import javax.validation.constraints.NotNull;
+import datastructures.trees.OrderedChildren;
 import datastructures.trees.mappedchildrennode.MappedChildrenNode;
 
-public class Node<V> extends MappedChildrenNode<Node<V>, Node.ChildType, V>
+public class Node<V> extends MappedChildrenNode<Node<V>, Node.ChildType, V> implements OrderedChildren<Node<V>, V>
 {	
 	public enum ChildType
 	{
@@ -13,7 +17,7 @@ public class Node<V> extends MappedChildrenNode<Node<V>, Node.ChildType, V>
 	
 	public Node( V value )
 	{
-		super(value);
+		super(new EnumMap<>(ChildType.class), value);
 	}
 	
 	@Override
@@ -74,5 +78,12 @@ public class Node<V> extends MappedChildrenNode<Node<V>, Node.ChildType, V>
 	public boolean hasRight( )
 	{
 		return this.hasChild(ChildType.RIGHT);
+	}
+
+	@Override
+	public List<Node<V>> getOrderedChildren( )
+	{
+		// note: EnumMap guarantees natural ordering
+		return new LinkedList<>(this.getChildren());
 	}
 }

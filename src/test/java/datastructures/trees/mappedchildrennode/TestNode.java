@@ -1,7 +1,7 @@
 package datastructures.trees.mappedchildrennode;
 
 import org.junit.Test;
-import datastructures.trees.mappedchildrennode.Node;
+import datastructures.trees.mappedchildrennode.hashmapped.Node;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;

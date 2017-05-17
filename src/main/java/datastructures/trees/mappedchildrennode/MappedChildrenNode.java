@@ -1,7 +1,7 @@
 package datastructures.trees.mappedchildrennode;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
 import datastructures.trees.TreeNode;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -12,12 +12,12 @@ public abstract class MappedChildrenNode<N extends MappedChildrenNode<N, K, V>, 
 	private N parent;
 	private K key;
 	private V value;
-	private HashMap<K, N> children;
+	private Map<K, N> children;
 	
-	public MappedChildrenNode( @NotNull V value )
+	public MappedChildrenNode( Map<K, N> map, @NotNull V value )
 	{
 		this.value = value;
-		this.children = new HashMap<>();
+		this.children = map;
 		
 		this.clearInfo();
 	}

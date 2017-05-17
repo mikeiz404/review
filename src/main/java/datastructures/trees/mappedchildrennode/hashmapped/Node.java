@@ -1,11 +1,14 @@
-package datastructures.trees.mappedchildrennode;
+package datastructures.trees.mappedchildrennode.hashmapped;
+
+import java.util.HashMap;
+import datastructures.trees.mappedchildrennode.MappedChildrenNode;
 
 public class Node<K, V> extends MappedChildrenNode<Node<K, V>, K, V>
 {
 
 	public Node( V value )
 	{
-		super(value);
+		super(new HashMap<>(), value);
 	}
 
 	@Override
