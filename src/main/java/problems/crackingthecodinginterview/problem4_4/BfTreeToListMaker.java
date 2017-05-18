@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import datastructures.trees.TreeNode;
 
-public class BfsTreeToListMaker implements TreeToListMaker
+public class BfTreeToListMaker implements TreeToListMaker
 {
-	public static BfsTreeToListMaker INSTANCE = new BfsTreeToListMaker();
+	public static BfTreeToListMaker INSTANCE = new BfTreeToListMaker();
 	
 	/**
 	 * @see {@link TreeToListMaker}.
@@ -15,7 +15,7 @@ public class BfsTreeToListMaker implements TreeToListMaker
 	 * Approach: Explore tree in level order, using the linked lists, which are being created at each level, for the queue to save on space.
 	 * 
 	 * Time: O(n) where n represents the tree size.
-	 * Space: O(n).
+	 * Space: O(n) for lists.
 	 */
 	@Override
 	public <N extends TreeNode<N, V>, V> ArrayList<LinkedList<N>> makeList( N root )

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import datastructures.trees.TreeNode;
 
-public class DfsTreeToListMaker implements TreeToListMaker
+public class DfTreeToListMaker implements TreeToListMaker
 {
-	public static DfsTreeToListMaker INSTANCE = new DfsTreeToListMaker();
+	public static DfTreeToListMaker INSTANCE = new DfTreeToListMaker();
 	
 	/**
 	 * @see {@link TreeToListMaker}.
 	 * 
-	 * Approach: Explore tree in DFS fashion and append nodes to level list as they are visited.
+	 * Approach: Explore tree in depth-first fashion and append nodes to level list as they are visited.
 	 * 
 	 * Time: O(n) where n represents the tree size.
 	 * Space:
-	 *   O(log(n) + n) => O(n) for a balanced tree.
-	 *   O(n + n) => O(n) for an unbalanced tree.
+	 *   Balanced Tree: O(log(n) + n) => O(n) for stack and lists.
+	 *   Unbalanced Tree: O(n + n) => O(n) for stack and lists.
 	 */
 	@Override
 	public <N extends TreeNode<N, V>, V> ArrayList<LinkedList<N>> makeList( N root )

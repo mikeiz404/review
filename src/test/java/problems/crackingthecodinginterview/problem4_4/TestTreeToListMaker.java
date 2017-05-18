@@ -23,7 +23,7 @@ public abstract class TestTreeToListMaker
 		assertEquals(0, levels.size());
 	}
 	
-	private static <T> List<T> nodesToValues( List<Node<T>> nodes)
+	private static <T> List<T> nodesToValues( List<Node<T>> nodes )
 	{
 		return nodes.stream().map(n -> n.getValue()).collect(Collectors.toList());
 	}
@@ -47,6 +47,7 @@ public abstract class TestTreeToListMaker
 		ArrayList<LinkedList<Node<String>>> levels = maker.makeList(a);
 		
 		assertEquals(6, levels.size());
+		// note: binary tree node has ordered child iteration (enum map) so ordering will be consistently left node, right node
 		assertEquals(Arrays.asList("0:A"), nodesToValues(levels.get(0)));
 		assertEquals(Arrays.asList("1:B", "1:C"), nodesToValues(levels.get(1)));
 		assertEquals(Arrays.asList("2:D", "2:E", "2:F"), nodesToValues(levels.get(2)));
