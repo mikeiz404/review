@@ -91,12 +91,16 @@ public abstract class MappedChildrenNode<N extends MappedChildrenNode<N, K, V>, 
 		
 		return this.children.containsKey(key);
 	}
-	
 
 	@Override
 	public @NotNull Collection<N> getChildren( )
 	{
 		return this.children.values();
+	}
+	
+	public @NotNull Collection<K> getChildrenKeys( )
+	{
+		return this.children.keySet();
 	}
 	
 	@Override
@@ -143,4 +147,33 @@ public abstract class MappedChildrenNode<N extends MappedChildrenNode<N, K, V>, 
 		
 		return checkNotNull(this.getSelf());
 	}
+	
+	@Override
+	public String toString( )
+	{
+		return String.format("%s(%s)", this.getClass().getSimpleName(), this.getValue());
+	}
+
+	@Override
+	public int hashCode( )
+	{
+		return this.getValue().hashCode();
+	}
+
+	@Override
+	public boolean equals( Object o )
+	{
+		if( o instanceof MappedChildrenNode )
+		{
+			MappedChildrenNode<?, ?, ?> node = (MappedChildrenNode<?, ?, ?>) o;
+			
+			return this.getValue().equals(node.getValue());
+		}
+		else // o !instanceof MappedChildrenNode
+		{
+			return false;
+		}
+	}
+	
+	
 }

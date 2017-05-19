@@ -1,6 +1,5 @@
 package datastructures.trees.mappedchildrennode.enummapped;
 
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
